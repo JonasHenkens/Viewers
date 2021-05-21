@@ -22,7 +22,9 @@ import ReactDOM from 'react-dom';
  * by using the exported `App` component, and passing in your extensions as props using
  * the defaultExtensions property.
  */
-import OHIFLesionTrackerExtension from '@ohif/extension-lesion-tracker';
+import OHIFVTKExtension from '@ohif/extension-vtk';
+import OHIFDicomHtmlExtension from '@ohif/extension-dicom-html';
+import OHIFDicomMicroscopyExtension from '@ohif/extension-dicom-microscopy';
 import OHIFDicomPDFExtension from '@ohif/extension-dicom-pdf';
 
 /*
@@ -36,7 +38,12 @@ if (window) {
 
 const appProps = {
   config,
-  defaultExtensions: [OHIFLesionTrackerExtension, OHIFDicomPDFExtension],
+  defaultExtensions: [
+    OHIFVTKExtension,
+    OHIFDicomHtmlExtension,
+    OHIFDicomMicroscopyExtension,
+    OHIFDicomPDFExtension,
+  ],
 };
 
 /** Create App */

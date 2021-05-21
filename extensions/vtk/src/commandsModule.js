@@ -133,7 +133,8 @@ const commandsModule = ({ commandsManager }) => {
     },
     enableCrosshairsTool: () => {
       apis.forEach((api, apiIndex) => {
-        const istyle = vtkInteractorStyleMPRCrosshairs.newInstance();
+        let istyle = vtkInteractorStyleMPRCrosshairs.newInstance();
+        if (apiIndex == 0) istyle = vtkInteractorStyleMPRRotate.newInstance();
 
         api.setInteractorStyle({
           istyle,
@@ -169,16 +170,23 @@ const commandsModule = ({ commandsManager }) => {
       });
     },
     setSlabThickness: ({ slabThickness }) => {
-      apis.forEach(api => {
-        api.setSlabThickness(slabThickness);
-      });
+      apis[0].setSlabThickness(slabThickness);
+      // const istyle = vtkInteractorStyleMPRRotate.newInstance();
+      // apis[0].setInteractorStyle({ istyle });
+
+      // apis.forEach(api => {
+      //   api.setSlabThickness(slabThickness);
+      // });
     },
     changeSlabThickness: ({ change }) => {
-      apis.forEach(api => {
-        const slabThickness = Math.max(api.getSlabThickness() + change, 0.1);
+      const slabThickness = Math.max(api.getSlabThickness() + change, 0.1);
+      apis[0].setSlabThickness(slabThickness);
 
-        api.setSlabThickness(slabThickness);
-      });
+      // apis.forEach(api => {
+      //   const slabThickness = Math.max(api.getSlabThickness() + change, 0.1);
+
+      //   api.setSlabThickness(slabThickness);
+      // });
     },
     setBlendModeToComposite: () => {
       apis.forEach(api => {
@@ -227,6 +235,13 @@ const commandsModule = ({ commandsManager }) => {
 
       const viewportProps = [
         {
+          //Axial (rotate)
+          orientation: {
+            sliceNormal: [0, 0, 1],
+            viewUp: [0, -1, 0],
+          },
+        },
+        {
           //Axial
           orientation: {
             sliceNormal: [0, 0, 1],
@@ -250,7 +265,7 @@ const commandsModule = ({ commandsManager }) => {
       ];
 
       try {
-        apis = await setMPRLayout(displaySet, viewportProps, 1, 3);
+        apis = await setMPRLayout(displaySet, viewportProps, 2, 2);
       } catch (error) {
         throw new Error(error);
       }
@@ -265,9 +280,9 @@ const commandsModule = ({ commandsManager }) => {
           vtkSVGCrosshairsWidget.newInstance(),
           'crosshairsWidget'
         );
-
+        let istyle = vtkInteractorStyleMPRCrosshairs.newInstance();
         const uid = api.uid;
-        const istyle = vtkInteractorStyleMPRCrosshairs.newInstance();
+        if (apiIndex == 0) istyle = vtkInteractorStyleMPRRotate.newInstance();
 
         api.setInteractorStyle({
           istyle,

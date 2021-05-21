@@ -26,6 +26,11 @@ const ViewerLocalFileData = asyncComponent(() =>
     /* webpackChunkName: "ViewerLocalFileData" */ '../connectedComponents/ViewerLocalFileData.js'
   )
 );
+const ViewerJsonLocal = asyncComponent(() =>
+  import(
+    /* webpackChunkName: "ViewerJsonLocal" */ '../connectedComponents/ViewerJsonLocal.js'
+  )
+);
 
 const reload = () => window.location.reload();
 
@@ -40,7 +45,7 @@ const ROUTES_DEF = {
       component: StandaloneRouting,
     },
     list: {
-      path: ['/studylist', '/'],
+      path: '/studylist',
       component: StudyListRouting,
       condition: appConfig => {
         return appConfig.showStudyList !== undefined
@@ -51,6 +56,10 @@ const ROUTES_DEF = {
     local: {
       path: '/local',
       component: ViewerLocalFileData,
+    },
+    localTest: {
+      path: ['/dicomviewer', '/'],
+      component: ViewerJsonLocal,
     },
     IHEInvokeImageDisplay: {
       path: '/IHEInvokeImageDisplay',

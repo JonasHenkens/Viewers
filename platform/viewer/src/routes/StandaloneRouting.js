@@ -31,7 +31,6 @@ class StandaloneRouting extends Component {
   parseQueryAndRetrieveDICOMWebData(query) {
     return new Promise((resolve, reject) => {
       const url = query.url;
-
       if (!url) {
         return reject(new Error('No URL was specified. Use ?url=$yourURL'));
       }
@@ -172,12 +171,12 @@ class StandaloneRouting extends Component {
     return this.state.studies ? (
       <ConnectedViewer studies={this.state.studies} />
     ) : (
-      <ConnectedViewerRetrieveStudyData
-        studyInstanceUIDs={this.state.studyInstanceUIDs}
-        seriesInstanceUIDs={this.state.seriesInstanceUIDs}
-        server={this.state.server}
-      />
-    );
+        <ConnectedViewerRetrieveStudyData
+          studyInstanceUIDs={this.state.studyInstanceUIDs}
+          seriesInstanceUIDs={this.state.seriesInstanceUIDs}
+          server={this.state.server}
+        />
+      );
   }
 }
 

@@ -25,15 +25,15 @@ const definitions = [
     commandName: 'enableLevelTool',
     commandOptions: {},
   },
-  {
-    id: 'Rotate',
-    label: 'Rotate',
-    icon: '3d-rotate',
-    //
-    type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
-    commandName: 'enableRotateTool',
-    commandOptions: {},
-  },
+  // {
+  //   id: 'Rotate',
+  //   label: 'Rotate',
+  //   icon: '3d-rotate',
+  //   //
+  //   type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
+  //   commandName: 'enableRotateTool',
+  //   commandOptions: {},
+  // },
   /*
   {
     id: 'setBlendModeToComposite',
